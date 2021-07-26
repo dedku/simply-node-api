@@ -2,6 +2,10 @@ const http = require('http');
 const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('./controlers/productControler.js')
 
 const server = http.createServer((req, res) => {
+
+    res.writeHead(200, { 'content-type': 'text/html' })
+    fs.createReadStream('index.html').pipe(res)
+
     if(req.url === '/api/products' && req.method === 'GET'){
         getProducts(req,res)
     } else if(req.url.match(/\/api\/products\/([a-z0-9-]+)/) && req.method === 'GET'){

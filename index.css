@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 2em;
+  background: #5801cb;
+  color: white;
+  font-family: "Nunito";
+}
+
+.form-container {
+  padding: 2em;
+  display: grid;
+  grid-template-columns: 70% auto;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    "label label"
+    "info info"
+    "last last";
+}
+
+p {
+  grid-area: info;
+}
+
+h2 {
+  grid-area: last;
+}
+/* Improvements */
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+.form-container {
+  background: #6900f3;
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.2em;
+  grid-area: label;
+}
+
+p {
+  color: #caa2ff;
+}

@@ -1,12 +1,25 @@
 const http = require('http');
+const fs = require('fs')
+const path = require('path');
+
 const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('./controlers/productControler.js')
 
 const server = http.createServer((req, res) => {
+    if(req.url === "/"){
 
-    res.writeHead(200, { 'content-type': 'text/html' })
-    fs.createReadStream('index.html').pipe(res)
+        fs.readFile("./public/index.html", "UTF-8", function(err, html){
+            res.writeHead(200, {"Content-Type": "text/html"});
+            res.end(html);
+        });
 
-    if(req.url === '/api/products' && req.method === 'GET'){
+    }else if(req.url.match("\.css$")){
+
+        let cssPath = path.join(__dirname, 'public', req.url);
+        const fileStream = fs.createReadStream(cssPath, "UTF-8");
+        res.writeHead(200, {"Content-Type": "text/css"});
+        fileStream.pipe(res);
+
+    } else if(req.url === '/api/products' && req.method === 'GET'){
         getProducts(req,res)
     } else if(req.url.match(/\/api\/products\/([a-z0-9-]+)/) && req.method === 'GET'){
 
